@@ -28,6 +28,11 @@ class CBContact_Widget extends WP_Widget
     $nonce = wp_create_nonce("cb_contact_form_nonce");
     $title = apply_filters('widget_title', $instance['title']);
 
+    $plugin_vars = array(
+        'fields' => $instance
+    );
+    extract($plugin_vars);
+
     if (isset($instance['send_button']) && $instance['send_button'] != '') {
       $send_button = $instance['send_button'];
     } else {
@@ -51,11 +56,14 @@ class CBContact_Widget extends WP_Widget
    */
   public function form($instance)
   {
+    extract($instance);
+
     if (isset($instance['title'])) {
       $title = $instance['title'];
     } else {
       $title = __('Contact Us', 'cb_contact_form');
     }
+
     if (isset($instance['subject']) && $instance['subject'] != '') {
       $subject = $instance['subject'];
     } else {
@@ -97,6 +105,16 @@ class CBContact_Widget extends WP_Widget
     $instance['sendto'] = (!empty($new_instance['sendto']) ) ? strip_tags($new_instance['sendto']) : '';
     $instance['success_message'] = (!empty($new_instance['success_message']) ) ? strip_tags($new_instance['success_message']) : '';
     $instance['send_button'] = (!empty($new_instance['send_button']) ) ? strip_tags($new_instance['send_button']) : '';
+
+    $instance['cb_visible_email'] = isset($new_instance['cb_visible_email']) && $new_instance['cb_visible_email'] == 1 ? '1' : '0';
+    $instance['cb_visible_name'] = isset($new_instance['cb_visible_name']) && $new_instance['cb_visible_name'] == 1 ? '1' : '0';
+    $instance['cb_visible_subject'] = isset($new_instance['cb_visible_subject']) && $new_instance['cb_visible_subject'] == 1 ? '1' : '0';
+    $instance['cb_visible_message'] = isset($new_instance['cb_visible_message']) && $new_instance['cb_visible_message'] == 1 ? '1' : '0';
+
+    $instance['cb_required_email'] = isset($new_instance['cb_required_email']) && $new_instance['cb_required_email'] == 1 ? '1' : '0';
+    $instance['cb_required_name'] = isset($new_instance['cb_required_name']) && $new_instance['cb_required_name'] == 1 ? '1' : '0';
+    $instance['cb_required_subject'] = isset($new_instance['cb_required_subject']) && $new_instance['cb_required_subject'] == 1 ? '1' : '0';
+    $instance['cb_required_message'] = isset($new_instance['cb_required_message']) && $new_instance['cb_required_message'] == 1 ? '1' : '0';
 
     if (get_option('cb_contact_email') != '') {
       update_option('cb_contact_email', $instance['sendto'], '', 'no');
