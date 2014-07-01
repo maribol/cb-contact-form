@@ -1,4 +1,4 @@
-cb-contact-form
+CB Contact Form - Wordpress Plugin
 ===============
 
 A very simple contact form plugin for Wordpress
