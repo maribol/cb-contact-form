@@ -2,13 +2,12 @@
 
 /**
  * Plugin Name: CB Contact Form
- * Plugin URI: http://codebuzz.ro/cb-contact-form
+ * Plugin URI: http://codebuzz.ro/
  * Description: There are many contact form plugins and most of them have too many options that you don't need.
  * Version: 1.1
  * Author: CodeBuzz (Samuel Todosiciuc)
  * Author URI: http://codebuzz.ro/author/samuel/
  */
-// register CBContact_Widget widget
 
 require 'CBContactWidget.class.php';
 require 'functions.php';
